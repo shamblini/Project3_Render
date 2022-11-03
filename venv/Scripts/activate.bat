@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\bamblini\Desktop\School\Fall 2022\CSCE 315\Render\project3\venv
+set VIRTUAL_ENV=C:\Users\bamblini\Desktop\School\Fall 2022\CSCE 315\Render\Project3RenderRepo\Project3_Render\venv
 
 if not defined PROMPT set PROMPT=$P$G
 

@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\bamblini\Desktop\School\Fall 2022\CSCE 315\Render\project3\venv"
+VIRTUAL_ENV="C:\Users\bamblini\Desktop\School\Fall 2022\CSCE 315\Render\Project3RenderRepo\Project3_Render\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
