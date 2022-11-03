@@ -1,7 +1,7 @@
 databases:
-  - name: Spin_n_Stone
-    databaseName: Spin_n_Stone
-    user: Spin_n_Stone
+  - name: spinnstone
+    databaseName: spinnstone
+    user: spinnstone
 
 services:
   - type: web
