@@ -1,7 +1,7 @@
 databases:
-  - name: spinnstone
-    databaseName: spinnstone
-    user: spinnstone
+  - name: dpg-cdi085un6mpue9hln8v0-a
+    databaseName: project_3_render_db
+    user: project_3_render_db_user
 
 services:
   - type: web
