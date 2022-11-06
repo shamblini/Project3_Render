@@ -8,5 +8,24 @@
 </head>
 <body>
     <h1>This is the login page</h1>
+    {% block page_content %}
+    {% for i in inventory %}
+
+    <div>
+
+        <div>
+
+            <p>Ingredient: {{ i.ingredient }}</p>
+
+            <p>Quantity: {{ i.quantity }}</p>
+
+            <p>Unit: {{ i.unit }}</p>
+
+        </div>
+
+    </div>
+
+{% endfor %}
+    {% endblock %}
 </body>
 </html>
