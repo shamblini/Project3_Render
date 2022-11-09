@@ -1,31 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
+
 <html lang="en">
+<link rel="stylesheet" href="{% static 'loginpage.css' %}">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spin n Stone Login</title>
 </head>
+
 <body>
-    <h1>This is the login page</h1>
-    {% block page_content %}
-    {% for i in inventory %}
 
-    <div>
+    <h1>Welcome to Spin n' Stone</h1>
 
-        <div>
+    <div class="container">
+     
+    <a href="manager\" target="_blank">Manager</a>
+    <a href="server\" target="_blank">Server</a>
+    <a href="customer\" target="_blank">Customer</a>
+</div>
 
-            <p>Ingredient: {{ i.ingredient }}</p>
-
-            <p>Quantity: {{ i.quantity }}</p>
-
-            <p>Unit: {{ i.unit }}</p>
-
-        </div>
-
-    </div>
-
-{% endfor %}
-    {% endblock %}
 </body>
 </html>

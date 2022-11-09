@@ -1,0 +1,29 @@
+body{
+    background: black;
+}
+
+h2{
+    color:white;
+}
+
+button{
+    background: gold;
+    color:black;
+    border-radius: 10px;
+    border: black solid 1px;
+}
+
+.grid{
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 120px));
+    height: 80px;
+}
+
+.next{
+    color:black;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-right: 10px;
+}

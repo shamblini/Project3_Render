@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="{% static 'Pizza_selection.css' %}">
+<body>
+
+
+
+<div class = "grid">  
+
+<button class = "card" style="background-image: url({% static 'media/cheese_pizza.jpg' %})" onclick="location.href='Cheese_selection/';">
+    <div class ="yellow"> Cheese </div> 
+</button>
+
+<button class = "card" style="background-image: url({% static 'media/pepperoni_pizza.jpg' %})" onclick="location.href='Cheese_selection/';"> 
+    <div class ="yellow" > Pepperoni </div>  
+</button>
+<button class = "card" style="background-image: url({% static 'media/1topping.jpg' %})" onclick="location.href='Cheese_selection/';"> 
+    <div class ="yellow"> 1-topping </div> 
+</button>
+<button class = "card" style="background-image: url({% static 'media/4topping.jpg' %})" onclick="location.href='Cheese_selection/';"> 
+    <div class ="yellow"> 4-topping </div> 
+ </button>
+
+
+</div>  
+
+</body>
+</html>

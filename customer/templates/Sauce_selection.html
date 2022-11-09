@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="{% static 'Sauce.css' %}">
+<body>    
+
+<div class = "grid">  
+
+<button class = "card" style="background: url({% static 'media/traditional.jpg' %}); background-size: cover;  background-position: center center;" 
+onclick="location.href='Toppings_selection/';">
+    <div class ="yellow"> Traditional Red </div> 
+</button>
+
+<button class = "card" style="background: url({% static 'media/zesty.jpg' %}); background-size: cover;  background-position: center center;" 
+onclick="location.href='Toppings_selection/';"> 
+    <div class ="yellow" > Zesty Red </div>  
+</button>
+<button class = "card" style="background: url({% static 'media/alfredo.jpg' %}); background-size: cover;  background-position: center center;"
+ onclick="location.href='Toppings_selection/';"> 
+    <div class ="yellow"> Alfredo </div> 
+</button>
+
+
+</div>  
+
+</body>
+</html>
