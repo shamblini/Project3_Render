@@ -4,18 +4,16 @@
 <link rel="stylesheet" href="{% static 'Cheese_selection.css' %}">
 <body>
 
+<form method="POST">
+    {% csrf_token %}
 
+    <div class = "grid">  
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/mozzarella.jpg' %}); background-size:cover;" value="Mozzarella">
+        <input type="submit" name="btn" class = "card" style="background-image: url({% static 'media/provolones.jpg' %}); background-size:cover;" value="Provolone"> 
+    </div>  
 
-<div class = "grid">  
-
-<button class = "card" style="background: url({% static 'media/mozzarella.jpg' %}); background-size:cover;" onclick="location.href='Sauce_selection/';" >
-    <div class ="yellow"> Mozzarella </div> 
-</button>
-<button class = "card" style="background-image: url({% static 'media/provolones.jpg' %}); background-size:cover;" onclick="location.href='Sauce_selection/';"> 
-    <div class ="yellow" > Provolone </div>  
-</button>
-
-</div>  
+</form>
+{{ val }}
 
 </body>
 </html>

@@ -4,24 +4,18 @@
 <link rel="stylesheet" href="{% static 'Sauce.css' %}">
 <body>    
 
-<div class = "grid">  
+<form method="POST">
+    {% csrf_token %}
+    
+    <div class = "grid">  
 
-<button class = "card" style="background: url({% static 'media/traditional.jpg' %}); background-size: cover;  background-position: center center;" 
-onclick="location.href='Toppings_selection/';">
-    <div class ="yellow"> Traditional Red </div> 
-</button>
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/traditional.jpg' %}); background-size: cover;  background-position: center center;" value="Traditional Red">
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/zesty.jpg' %}); background-size: cover;  background-position: center center;" value="Zesty Red"> 
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/alfredo.jpg' %}); background-size: cover;  background-position: center center;" value="Alfredo"> 
 
-<button class = "card" style="background: url({% static 'media/zesty.jpg' %}); background-size: cover;  background-position: center center;" 
-onclick="location.href='Toppings_selection/';"> 
-    <div class ="yellow" > Zesty Red </div>  
-</button>
-<button class = "card" style="background: url({% static 'media/alfredo.jpg' %}); background-size: cover;  background-position: center center;"
- onclick="location.href='Toppings_selection/';"> 
-    <div class ="yellow"> Alfredo </div> 
-</button>
-
-
-</div>  
+    </div>  
+</form>
+{{ val }}
 
 </body>
 </html>

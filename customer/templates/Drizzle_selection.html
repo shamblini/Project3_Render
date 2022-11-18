@@ -4,29 +4,19 @@
 <link rel="stylesheet" href="{% static 'Drizzle_selection.css' %}">
 <body>    
 
-<div class = "grid">  
+<form method="POST">
+    {% csrf_token %}
+    
+    <div class = "grid">  
 
-<button class = "card" style="background: url({% static 'media/ranch.jpg' %}); background-size: cover;  background-position: center center;" 
-onclick="location.href='Checkout/';">
-    <div class ="yellow"> Ranch </div> 
-</button>
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/ranch.jpg' %}); background-size: cover;  background-position: center center;" value="Ranch">
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/bbq.jpg' %}); background-size: cover;  background-position: center center;" value="BBQ"> 
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/oil.jpg' %}); background-size: cover;  background-position: center center;" value="Olive Oil"> 
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/sri.jpg' %}); background-size: cover;  background-position: center center;" value="Sriracha">
+    </div>  
 
-<button class = "card" style="background: url({% static 'media/bbq.jpg' %}); background-size: cover;  background-position: center center;" 
-onclick="location.href='Checkout/';"> 
-    <div class ="yellow" > BBQ </div>  
-</button>
-
-<button class = "card" style="background: url({% static 'media/oil.jpg' %}); background-size: cover;  background-position: center center;"
- onclick="location.href='Checkout/';"> 
-    <div class ="yellow"> Olive Oil </div> 
-</button>
-
-<button class = "card" style="background: url({% static 'media/sri.jpg' %}); background-size: cover;  background-position: center center;" 
-onclick="location.href='Checkout/';">
-    <div class ="yellow"> Sriracha </div> 
-</button>
-
-</div>  
+</form>
+{{ val }}
 
 </body>
 </html>

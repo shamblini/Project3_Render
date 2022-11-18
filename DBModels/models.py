@@ -8,7 +8,7 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField as ArrayField
 
-class P3Category(models.Model):
+class Category(models.Model):
     category_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
@@ -18,10 +18,10 @@ class P3Category(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'p3_category'
+        db_table = 'category'
 
 
-class P3Employee(models.Model):
+class Employee(models.Model):
     employee_id = models.IntegerField(primary_key=True)
     first_name = models.CharField(max_length=100, blank=True, null=True)
     last_name = models.CharField(max_length=100, blank=True, null=True)
@@ -36,27 +36,27 @@ class P3Employee(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'p3_employee'
+        db_table = 'employee'
 
 
-class P3Job(models.Model):
+class Job(models.Model):
     job_id = models.IntegerField(primary_key=True)
     job_title = models.CharField(max_length=100, blank=True, null=True)
-    salary = models.IntegerField(blank=True, null=True)
+    salary = models.FloatField(blank=True, null=True)
 
     def __str__(self):
         return self.job_title
 
     class Meta:
         managed = False
-        db_table = 'p3_job'
+        db_table = 'job'
 
-class P3Product(models.Model):
+class Product(models.Model):
     product_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     qty_stock = models.IntegerField(blank=True, null=True)
-    price = models.IntegerField(blank=True, null=True)
+    price = models.FloatField(blank=True, null=True)
     category_id = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
@@ -64,25 +64,26 @@ class P3Product(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'p3_product'
+        db_table = 'product'
 
 
-class P3Transaction(models.Model):
+class Transaction(models.Model):
     # id = models.IntegerField(null=True, blank=True)
     type = models.CharField(max_length=100, blank=True, null=True)
-    product = models.TextField(blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
-    cost = models.IntegerField(blank=True, null=True)
+    products = ArrayField(ArrayField(models.CharField(max_length=50, blank=True, null=True)))
+    time = models.DateTimeField(blank=True, null=True)
+    cost = models.FloatField(blank=True, null=True)
 
-    def __str__(self):
-        return self.product
+    # def __str__(self):
+    #     return str(self.time) + str(self.products)
 
     class Meta:
         managed = False
-        db_table = 'p3_transaction'
+        db_table = 'transaction'
+        ordering = ('-time',)
 
 
-class P3Type(models.Model):
+class Type(models.Model):
     type_id = models.IntegerField(primary_key=True)
     type = models.CharField(max_length=100, blank=True, null=True)
 
@@ -91,10 +92,10 @@ class P3Type(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'p3_type'
+        db_table = 'type'
 
 
-class P3User(models.Model):
+class Customer(models.Model):
     id = models.IntegerField(primary_key=True)
     first_name = models.CharField(max_length=100, blank=True, null=True)
     last_name = models.CharField(max_length=100, blank=True, null=True)
@@ -108,7 +109,7 @@ class P3User(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'p3_user'
+        db_table = 'customer'
 
 class Recipe(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
@@ -121,4 +122,4 @@ class Recipe(models.Model):
     class Meta:
         managed = False
         db_table = 'recipe'
-
+ 

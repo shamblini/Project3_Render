@@ -6,24 +6,19 @@
 
 
 
-<div class = "grid">  
 
-<button class = "card" style="background-image: url({% static 'media/cheese_pizza.jpg' %})" onclick="location.href='Cheese_selection/';">
-    <div class ="yellow"> Cheese </div> 
-</button>
+<form method="POST">
+    {% csrf_token %}
+        
+    <div class = "grid">  
+        <input type="submit" name="btn" class = "card" style="background-image: url({% static 'media/cheese_pizza.jpg' %})" value="Cheese"> 
+        <input type="submit" name="btn" class = "card" style="background-image: url({% static 'media/pepperoni_pizza.jpg' %})" value="Pepperoni"> 
+        <input type="submit" name="btn" class = "card" style="background-image: url({% static 'media/1topping.jpg' %})" value="1-topping"> 
+        <input type="submit" name="btn" class = "card" style="background-image: url({% static 'media/4topping.jpg' %})" value="4-topping"> 
+    </div>  
 
-<button class = "card" style="background-image: url({% static 'media/pepperoni_pizza.jpg' %})" onclick="location.href='Cheese_selection/';"> 
-    <div class ="yellow" > Pepperoni </div>  
-</button>
-<button class = "card" style="background-image: url({% static 'media/1topping.jpg' %})" onclick="location.href='Cheese_selection/';"> 
-    <div class ="yellow"> 1-topping </div> 
-</button>
-<button class = "card" style="background-image: url({% static 'media/4topping.jpg' %})" onclick="location.href='Cheese_selection/';"> 
-    <div class ="yellow"> 4-topping </div> 
- </button>
-
-
-</div>  
+</form>
+{{ val }}
 
 </body>
 </html>

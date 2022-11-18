@@ -4,90 +4,31 @@
 <link rel="stylesheet" href="{% static 'Toppings_selection.css' %}">
 <body>    
 
-<div class = "grid">  
+<form method="POST">
+    {% csrf_token %}
 
-<button class = "card" style="background: url({% static 'media/meatball.jpg' %}); background-size: cover;  background-position: center center;" 
-onclick="location.href='Drizzle_selection/';">
-    <div class ="yellow"> Meatball </div> 
-</button>
+    <div class = "grid">  
 
-<button class = "card" style="background: url({% static 'media/ham.jpg' %}); background-size: cover;  background-position: center center;" 
-onclick="location.href='Drizzle_selection/';"> 
-    <div class ="yellow" > Diced Ham </div>  
-</button>
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/meatball.jpg' %}); background-size: cover;  background-position: center center;" value="Meatball">
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/ham.jpg' %}); background-size: cover;  background-position: center center;" value="Diced Ham"> 
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/italian.jpg' %}); background-size: cover;  background-position: center center;" value="Italian Sausage"> 
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/chicken.jpg' %}); background-size: cover;  background-position: center center;" value="Smoked Chicken">
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/pepperoni.jpg' %}); background-size: cover;  background-position: center center;" value="Pepperoni"> 
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/salami.jpg' %}); background-size: cover;  background-position: center center;" value="Salami"> 
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/garlic.jpg' %}); background-size: cover;  background-position: center center;" value="Roasted Garlic">
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/green.jpg' %}); background-size: cover;  background-position: center center;" value="Green Peppers"> 
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/spinach.jpg' %}); background-size: cover;  background-position: center center;" value="Spinach"> 
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/banana.jpg' %}); background-size: cover;  background-position: center center;" value="Banana Peppers">
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/olives.jpg' %}); background-size: cover;  background-position: center center;" value="Black Olives"> 
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/shrooms.jpg' %}); background-size: cover;  background-position: center center;" value="Mushrooms"> 
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/tomatoes.jpg' %}); background-size: cover;  background-position: center center;" value="Tomatoes">
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/onions.jpg' %}); background-size: cover;  background-position: center center;" value="Onions"> 
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/pineapple.jpg' %}); background-size: cover;  background-position: center center;" value="Pineapple"> 
+        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/jalapeno.jpg' %}); background-size: cover;  background-position: center center;" value="Jalapenos"> 
 
-<button class = "card" style="background: url({% static 'media/italian.jpg' %}); background-size: cover;  background-position: center center;"
- onclick="location.href='Drizzle_selection/';"> 
-    <div class ="yellow"> Italian Sausage </div> 
-</button>
-
-<button class = "card" style="background: url({% static 'media/chicken.jpg' %}); background-size: cover;  background-position: center center;" 
-onclick="location.href='Drizzle_selection/';">
-    <div class ="yellow"> Smoked Chicken </div> 
-</button>
-
-<button class = "card" style="background: url({% static 'media/pepperoni.jpg' %}); background-size: cover;  background-position: center center;" 
-onclick="location.href='Drizzle_selection/';"> 
-    <div class ="yellow" > Pepperoni </div>  
-</button>
-
-<button class = "card" style="background: url({% static 'media/salami.jpg' %}); background-size: cover;  background-position: center center;"
- onclick="location.href='Drizzle_selection/';"> 
-    <div class ="yellow"> Salami </div> 
-</button>
-
-<button class = "card" style="background: url({% static 'media/garlic.jpg' %}); background-size: cover;  background-position: center center;" 
-onclick="location.href='Drizzle_selection/';">
-    <div class ="yellow"> Roasted Garlic </div> 
-</button>
-
-<button class = "card" style="background: url({% static 'media/green.jpg' %}); background-size: cover;  background-position: center center;" 
-onclick="location.href='Drizzle_selection/';"> 
-    <div class ="yellow" > Green Peppers </div>  
-</button>
-
-<button class = "card" style="background: url({% static 'media/spinach.jpg' %}); background-size: cover;  background-position: center center;"
- onclick="location.href='Drizzle_selection/';"> 
-    <div class ="yellow"> Spinach </div> 
-</button>
-
-<button class = "card" style="background: url({% static 'media/banana.jpg' %}); background-size: cover;  background-position: center center;" 
-onclick="location.href='Drizzle_selection/';">
-    <div class ="yellow"> Banana Peppers </div> 
-</button>
-
-<button class = "card" style="background: url({% static 'media/olives.jpg' %}); background-size: cover;  background-position: center center;" 
-onclick="location.href='Drizzle_selection/';"> 
-    <div class ="yellow" > Black Olives </div>  
-</button>
-
-<button class = "card" style="background: url({% static 'media/shrooms.jpg' %}); background-size: cover;  background-position: center center;"
- onclick="location.href='Drizzle_selection/';"> 
-    <div class ="yellow"> Mushrooms </div> 
-</button>
-
-<button class = "card" style="background: url({% static 'media/tomatoes.jpg' %}); background-size: cover;  background-position: center center;" 
-onclick="location.href='Drizzle_selection/';">
-    <div class ="yellow"> Tomatoes </div> 
-</button>
-
-<button class = "card" style="background: url({% static 'media/onions.jpg' %}); background-size: cover;  background-position: center center;" 
-onclick="location.href='Drizzle_selection/';"> 
-    <div class ="yellow" > Onions </div>  
-</button>
-
-<button class = "card" style="background: url({% static 'media/pineapple.jpg' %}); background-size: cover;  background-position: center center;"
- onclick="location.href='Drizzle_selection/';"> 
-    <div class ="yellow"> Pineapple </div> 
-</button>
-
-<button class = "card" style="background: url({% static 'media/jalapeno.jpg' %}); background-size: cover;  background-position: center center;"
- onclick="location.href='Drizzle_selection/';"> 
-    <div class ="yellow"> Jalapenos </div> 
-</button>
-
-
-</div>  
+    </div>  
+</form>
+{{ val }}
 
 </body>
 </html>
