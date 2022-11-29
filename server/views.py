@@ -48,8 +48,9 @@ initializeLists()
 
 # Create your views here.
 def serverScreen(request):
-    request.session['test_var'] = True
-    if(request.session['base_control'] == None):
+    try:
+        print(request.session['base_control'])
+    except KeyError:
         request.session['base_control'] = True
         request.session['bd_control'] = True
         request.session['fd_control'] = True
