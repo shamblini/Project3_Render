@@ -1,4 +1,4 @@
-#!C:\Users\bamblini\Desktop\School\Fall 2022\CSCE 315\Render\Project3RenderRepo\Project3_Render\venv\Scripts\python.exe
+#!C:\Users\bamblini\Desktop\School\Fall 2022\CSCE 315\Project3_RenderFix\venv\Scripts\python.exe
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
