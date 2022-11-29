@@ -48,6 +48,7 @@ initializeLists()
 
 # Create your views here.
 def serverScreen(request):
+    request.session['test_var'] = True
     if(request.session['base_control'] == None):
         request.session['base_control'] = True
         request.session['bd_control'] = True
