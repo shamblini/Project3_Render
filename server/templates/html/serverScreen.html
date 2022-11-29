@@ -1,0 +1,171 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{% static 'server.css' %}">
+
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin n Stone Server View</title>
+
+</head>
+
+<body>
+ <div class = "archgrid">
+    <div class = "leftbox">
+        <form method="POST">
+            {% csrf_token %}
+            <h2>Primary Elements</h2>
+            <div class = "grid">
+                {% for product in products%}
+                {% if product.category_id == 2 %}
+                    <input type="submit" name="btn" class = "card" value={{product.name}}>
+                {%endif%}
+                {% endfor %}
+            </div>
+    
+            <h2>Crust</h2>
+            <div class = "grid">
+                <input type="submit" name="btn" class = "card" value="regular_crust"
+                {% if base_control %}
+                    disabled="disabled"
+                {%endif%}
+                >
+                {% for product in products%}
+                {% if product.category_id == 8 %}
+                    <input type="submit" name="btn" class = "card" value={{product.name}}
+                    {% if base_control %}
+                        disabled="disabled"
+                    {%endif%}
+                    >
+                {%endif%}
+                {% endfor %}
+                
+            </div>
+    
+            <h2>Cheese</h2>
+            <div class = "grid">
+                {% for product in products%}
+                {% if product.category_id == 3 %}
+                    <input type="submit" name="btn" class = "card" value={{product.name}}
+                    {% if base_control %}
+                        disabled="disabled"
+                    {%endif%}
+                    >
+                {%endif%}
+                {% endfor %}
+                
+            </div>
+    
+            <h2>Sauce</h2>
+            <div class = "grid">
+                <input type="submit" name="btn" class = "card" value="traditional_red_sauce"
+                {% if base_control %}
+                    disabled="disabled"
+                {%endif%}
+                >
+                <input type="submit" name="btn" class = "card" value="alfredo"
+                {% if base_control %}
+                    disabled="disabled"
+                {%endif%}
+                >
+                <input type="submit" name="btn" class = "card" value="zesty_Red"
+                {% if base_control %}
+                    disabled="disabled"
+                {%endif%}
+                >        
+            </div>
+    
+            <h2>Meat</h2>
+            <div class = "grid">
+                {% for product in products%}
+                {% if product.category_id == 6 %}
+                    <input type="submit" name="btn" class = "card" value={{product.name}}
+                    {% if base_control or topMax <= toppingCount %}
+                        disabled="disabled"
+                    {%endif%}
+                    >
+                {%endif%}
+                {% endfor %}    
+                
+            </div>
+    
+            <h2>Veggie</h2>
+            <div class = "grid">
+                {% for product in products%}
+                {% if product.category_id == 9 %}
+                    <input type="submit" name="btn" class = "card" value={{product.name}}
+                    {% if base_control  or topMax <= toppingCount %}
+                        disabled="disabled"
+                    {%endif%}
+                    >
+                {%endif%}
+                {% endfor %}  
+                
+            </div>
+    
+            <h2>Drizzle</h2>
+            <div class = "grid">
+                {% for product in products%}
+                {% if product.category_id == 5 %}
+                    <input type="submit" name="btn" class = "card" value={{product.name}}
+                    {% if base_control %}
+                        disabled="disabled"
+                    {%endif%}
+                    >
+                {%endif%}
+                {% endfor %}  
+                
+            </div>
+    
+            <h2>Fountain Drink</h2>
+            <div class = "grid">
+                {% for product in products%}
+                {% if product.category_id == 1 %}
+                    <input type="submit" name="btn" class = "card" value={{product.name}}
+                    {% if fd_control %}
+                        disabled="disabled"
+                    {%endif%}
+                    >
+                {%endif%}
+                {% endfor %}  
+                
+            </div>
+        
+            <h2>Bottled Drink</h2>
+            <div class = "grid">
+                {% for product in products%}
+                {% if product.category_id == 10 %}
+                    <input type="submit"name="btn" class = "card" value={{product.name}}
+                    {% if bd_control %}
+                        disabled="disabled"
+                    {%endif%}
+                    >
+                {%endif%}
+                {% endfor %}  
+                
+            </div>
+    
+        </form>
+
+    <div class="rightbox">
+        <form method="POST">
+            {% csrf_token %}
+            <div class = "grid">
+                <input type="submit" name="btn" class = "card" value="Clear Order">
+                <input type="submit" name="btn" class = "card" value="New Pizza">
+                <input type="submit" name="btn" class = "card" value="Confirm Order">
+            </div>
+        </form>
+        <textarea readonly class="checkout">
+            {{totalOrder}}
+        </textarea>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends 'table_header.html' %} 
+    {% block content %}
+
+    <div class="table_view">
+        <a href="{% url 'add-transaction' %}"><button class="add_product">Add Transaction</button></a>
+    <table>
+    <tr>
+        <th>ID</th>
+        <th>ITEMS</th>
+        <th>TIME</th>
+        <th>PAYMENT TYPE</th>
+        <th>COST</th>
+    </tr>
+    {% for transaction in transactions %}
+    <tr>
+        <td><a href="{% url 'show-transaction' transaction.id %}">{{transaction.id}}</a> </td>
+        <td><a href="{% url 'show-transaction' transaction.id %}">{{transaction.products}}</a> </td>
+        <td>{{transaction.time}}</td> 
+        <td>{{transaction.type}}</td> 
+        <td>${{transaction.cost}}</td> 
+    </tr>
+    {% endfor %}
+    </table>
+    </div>
+
+    {% endblock %}
+</html>

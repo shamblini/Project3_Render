@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="{% static 'TableView.css' %}">
+<head>
+    <title>Spin n Stone Manager View</title>
+</head>
+
+<body>
+<ul>
+    <li class="active"><a href="">Tables</a></li>
+    <li><a href="/manager/analytics/">Analytics</a></li>
+</ul>
+
+<ul>
+    <li id="products"><a href="/manager/products/">Products</a></li>
+    <li id="categories"><a href="/manager/categories/">Categories</a></li>
+    <li id="customers"><a href="/manager/customers/">Customers</a></li>
+    <li id="employees"><a href="/manager/employees/">Employees</a></li>
+    <li id="jobs"><a href="/manager/jobs/">Jobs</a></li>
+    <li id="recipes"><a href="/manager/recipes/">Recipes</a></li>
+    <li id="transactions"><a href="/manager/transactions/">Transactions</a></li>
+</ul>
+
+    <script>
+        const iAmHere = window.location.href;
+        const href_list = iAmHere.split("/")
+        const index = href_list.indexOf("manager");
+        const tofind = href_list[index+1];
+        const anchors = document.querySelectorAll('li');
+        anchors.forEach(anchor => {
+        if (anchor.id == tofind) {anchor.classList.add("active");}
+        }); 
+        </script>
+{% block content %}
+
+{% endblock %}
+</body>

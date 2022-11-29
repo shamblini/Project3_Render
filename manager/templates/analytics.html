@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="{% static 'TableView.css' %}">
+<head>
+    <title>Spin n Stone Manager View</title>
+</head>
+
+<body>
+    <ul>
+        <li><a href="/manager/products/">Tables</a></li>
+        <li class="active"><a href="">Analytics</a></li>
+    </ul>
+
+    <div class="analytics_view">
+        <div class="analytic_div">
+        <h3>Sales Report:</h3>
+        <form action="" method="POST", id="salesReport">
+        {% csrf_token %}
+        {{ sr_form.as_p}}
+
+        <input type="submit" class="analytics_load" name="form_type" value="Load Sales">
+        </form>
+        <table class="analytics">
+            <tr>
+                <th>ITEM</th>
+                <th>QTY SOLD</th>
+            </tr>
+
+            {% for key, value in sr_result.items %}
+            <tr>
+                <td>{{key}}</td>
+                <td>{{value}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
+        <div class="analytic_div">
+            <h3>Excess Report:</h3>
+            <form action="" method="POST", id="excessReport">
+            {% csrf_token %}
+            {{ er_form.as_p}}
+    
+            <input type="submit" class="analytics_load" name="form_type" value="Load Excess">
+            </form>
+            <table class="analytics">
+                <tr>
+                    <th>ITEM</th>
+                    <th>QTY SOLD</th>
+                </tr>
+    
+                {% for key, value in er_result.items %}
+                <tr>
+                    <td>{{key}}</td>
+                    <td>{{value}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="analytic_div">
+                <h3>Restock Report:</h3>
+                
+                {% csrf_token %}
+                
+                <table class="analytics">
+                    <tr>
+                        <th>ITEM</th>
+                        <th>CUR STOCK</th>
+                    </tr>
+        
+                    {% for key, value in rs_result.items %}
+                    <tr>
+                        <td>{{key}}</td>
+                        <td>{{value}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+        </div>
+        <div class="analytic_div">
+                <h3>Top Pairs:</h3>
+                <form action="" method="POST", id="sellPairs">
+                {% csrf_token %}
+                {{ sp_form.as_p}}
+        
+                <input type="submit" class="analytics_load" name="form_type" value="Load Pairs">
+                </form>
+                <table class="analytics">
+                    <tr>
+                        <th>ITEM 1</th>
+                        <th>ITEM 2</th>
+                        <th>QTY SOLD</th>
+                    </tr>
+        
+                    {% for key, value in sp_result.items %}
+                    <tr>
+                        {% for item in key %}
+                            <td>{{item}}</td>
+                        {% endfor %}
+                        <td>{{value}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+        </div>
+    </div>
+
+</body>

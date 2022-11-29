@@ -1,0 +1,72 @@
+body {
+  background-image: url('media/pizzza.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+
+}
+
+h1{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:black;
+    font-size: 100px;
+    text-align: center;
+    position:absolute;
+    top:0;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+}
+
+a:link {
+  font-size: 35px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: whitesmoke;
+}
+
+a:visited {
+  color: whitesmoke;
+}
+
+.border:hover{
+  border: solid 1px;
+  border-color: rgb(232,183,85);
+}
+
+.container{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  text-align: center;
+  color: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/*
+.footercenter{
+  display: flex;
+  justify-content: center;
+}
+*/
+.grid{
+  display: grid;
+  align-items: right;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.login{
+  text-align: center;
+  color: white;
+}
+

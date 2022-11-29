@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+<body>
+
+
+
+
+<form method="POST">
+    {% csrf_token %}
+        <h2 style="color:white;">Meat Topping<h2>        
+        <div class="container"; style="grid-template-columns: repeat(5, 1fr);">  
+        {% for order in orderNames %}
+        <div onclick="javascript:getElementById('b{{forloop.counter}}').click();" class = "card" style="background: #383838 url({% static 'media/'|add:order|add:'.jpg' %}); background-size: cover;  background-position: center center;"> 
+            <input id="b{{forloop.counter}}" class = "yellow" type="submit" name="btn"  value="{{order}}">
+        </div>
+        {% endfor %}
+        </div>
+        
+        <h2 style="color:white;">Veggie Topping<h2>   
+        <div class="container"; style="grid-template-columns: repeat(5, 1fr);">  
+            {% for order in orderNames2 %}
+            <div onclick="javascript:getElementById('b{{forloop.counter}}').click();" class = "card" style="background: #383838 url({% static 'media/'|add:order|add:'.jpg' %}); background-size: cover;  background-position: center center;"> 
+                <input id="b{{forloop.counter}}" class = "yellow" type="submit" name="btn"  value="{{order}}">
+            </div>
+            {% endfor %}
+            </div>
+
+</form>
+{{ val }}
+
+</body>
+</html>

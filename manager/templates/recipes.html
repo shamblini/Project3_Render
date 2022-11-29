@@ -1,0 +1,25 @@
+{% extends 'table_header.html' %} 
+    {% block content %}
+
+    <div class="table_view">
+        <a href="{% url 'add-recipe' %}"><button class="add_product">Add Recipe</button></a>
+    <table>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>INGREDIENTS</th>
+        <th>QUANTITIES</th>
+    </tr>
+    {% for recipe in recipes %}
+    <tr>
+        <td><a href="{% url 'show-recipe' recipe.id %}">{{recipe.id}}</a> </td>
+        <td><a href="{% url 'show-recipe' recipe.id %}">{{recipe.name}}</a> </td>
+        <td>{{recipe.ingredient_list}}</td> 
+        <td>{{recipe.quantity}}</td> 
+    </tr>
+    {% endfor %}
+    </table>
+    </div>
+
+    {% endblock%}
+</html>

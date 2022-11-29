@@ -1,0 +1,28 @@
+{% extends 'table_header.html' %} 
+    {% block content %}
+
+    <div class="table_view">
+        <a href="{% url 'add-product' %}"><button class="add_product">Add Product</button></a>
+    <!-- <button onclick=="{% url 'add-product' %}"' type="button">Add Product</button> -->
+    <table>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>QTY STOCK</th>
+        <th>PRICE</th>
+        <th>CATEGORY</th>
+    </tr>
+    {% for product in products %}
+    <tr>
+        <td><a href="{% url 'show-product' product.id %}">{{product.id}}</a> </td>
+        <td><a href="{% url 'show-product' product.id %}">{{product.name}}</a> </td>
+        <td>{{product.qty_stock}}</td> 
+        <td>{{product.price}}</td> 
+        <td>{{ category_names|get_category:product.category_id }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+    </div>
+
+    {% endblock %}
+</html>
