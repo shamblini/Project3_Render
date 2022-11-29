@@ -1,0 +1,29 @@
+{% extends 'table_header.html' %} 
+    {% block content %}
+
+    <div class="table_view">
+        <a href="{% url 'add-customer' %}"><button class="add_product">Add Customer</button></a>
+    <table>
+    <tr>
+        <th>ID</th>
+        <th>FIRST NAME</th>
+        <th>LAST NAME</th>
+        <th>USERNAME</th>
+        <th>TYPE ID</th>
+        <th>PHONE NUMBER</th>
+    </tr>
+    {% for customer in customers %}
+    <tr>
+        <td><a href="{% url 'show-customer' customer.id %}">{{customer.id}}</a> </td>
+        <td><a href="{% url 'show-customer' customer.id %}">{{customer.first_name}}</a> </td>
+        <td><a href="{% url 'show-customer' customer.id %}">{{customer.last_name}}</a> </td>
+        <td>{{customer.username}}</td> 
+        <td>{{customer.type_id}}</td> 
+        <td>{{customer.phone_number}}</td> 
+    </tr>
+    {% endfor %}
+    </table>
+    </div>
+
+    {% endblock %}
+</html>

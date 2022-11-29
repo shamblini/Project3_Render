@@ -1,19 +1,23 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="{% static 'Sauce.css' %}">
-<body>    
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+<body>
+
+
+
 
 <form method="POST">
     {% csrf_token %}
-    
-    <div class = "grid">  
 
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/traditional.jpg' %}); background-size: cover;  background-position: center center;" value="Traditional Red">
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/zesty.jpg' %}); background-size: cover;  background-position: center center;" value="Zesty Red"> 
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/alfredo.jpg' %}); background-size: cover;  background-position: center center;" value="Alfredo"> 
+        <div class="container"; style="grid-template-columns: repeat(2, 1fr);">  
+        {% for order in orderNames %}
+        <div onclick="javascript:getElementById('b{{forloop.counter}}').click();" class = "card" style="background: #383838 url({% static 'media/'|add:order|add:'.jpg' %}); background-size: cover;  background-position: center center;"> 
+            <input id="b{{forloop.counter}}" class = "yellow" type="submit" name="btn"  value="{{order}}">
+        </div>
+        {% endfor %}
+        </div>
 
-    </div>  
 </form>
 {{ val }}
 

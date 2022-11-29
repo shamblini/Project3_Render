@@ -1,32 +1,12 @@
 # pip3 install psycopg
 
 import traceback
-import psycopg
+import psycopg2
 import secrets
 import json
 import datetime
 
-from DBModels.models import P3Category, P3Employee, P3Job, P3Product, P3Transaction, P3Type, P3User, Recipe
-
-class Transaction:
-    '''
-    Contains all information for a single transaction.
-
-            Memebers:
-                    `int manager_id`: id of the active manager when the transaction occured
-                    `int employee_id`: id of the employee who made the transaction
-                    `str time`: time the transaction occured
-                    `int payment_type`: 0 for cash, 1 for card
-                    `float total`: total cost of the transaction
-                    `list[list[str]] items`: all items in the order
-    '''
-    def __init__(self, manager_id: int, employee_id: int, time: str, payment_type: int, total: float, items: 'list[list[str]]'):
-        self.manager_id = manager_id
-        self.employee_id = employee_id
-        self.time = time
-        self.payment_type = payment_type
-        self.total = total
-        self.items = items
+from DBModels.models import Category, Employee, Job, Product, Transaction, Type, Customer, Recipe
 
 def createTransaction(items: 'list[list[str]]'):
     '''
@@ -66,7 +46,7 @@ def createTransaction(items: 'list[list[str]]'):
     total = checkPriceCustomer(items)
     time = datetime.datetime.now()
 
-    P3Transaction.objects.create(type=0, product=itemString, date=time, cost=total)
+    Transaction.objects.create(type=0, products=itemString, time=time, cost=total)
 
     recipeIngredients = {}
 
@@ -94,10 +74,11 @@ def createTransaction(items: 'list[list[str]]'):
     recipeIngredients.update(foundRecipes)
 
     # go through ingredients and quantity, crementing the inventory 
+    order_id = Category.objects.get(name="order").id
 
     for ingredientName in recipeIngredients:
-        productToUpdate = P3Product.objects.get(name=ingredientName)
-        if not productToUpdate.category_id == 3:
+        productToUpdate = Product.objects.get(name=ingredientName)
+        if not productToUpdate.category_id == order_id:
             print(ingredientName + " Pass")
             productToUpdate.qty_stock = productToUpdate.qty_stock - recipeIngredients[ingredientName]
             productToUpdate.save()
@@ -121,10 +102,9 @@ def createRestock(name: str, quantity: int):
 
     total = checkPriceManager(name, quantity)
     print(total)
-    
-    P3Transaction.objects.create(type=1, product=product, date=time, cost=total)
+    Transaction.objects.create(type=1, products=product, time=time, cost=total)
 
-    productToUpdate = P3Product.objects.get(name=name)
+    productToUpdate = Product.objects.get(name=name)
     productToUpdate.qty_stock = productToUpdate.qty_stock + quantity
     productToUpdate.save()
 
@@ -159,15 +139,17 @@ def checkPriceCustomer(ingredients: 'list[list[str]]') -> float:
     '''
     total = 0.0
 
+    order_id = Category.objects.get(name="order").id
+
     for ingredient_list in ingredients:
         for ingredient_name in ingredient_list:
             ingredient = ""
             try:
-                ingredient = P3Product.objects.get(name=ingredient_name)
+                ingredient = Product.objects.get(name=ingredient_name)
             except:
                 # traceback.print_exc()
                 continue
-            if ingredient.category_id == 3 or ingredient.category_id == 9:
+            if ingredient.category_id == order_id or ingredient.category_id == 8:
                 total += ingredient.price
 
     return total
@@ -188,7 +170,7 @@ def checkPriceManager(name: str, quantity: int) -> float:
     ingredient = ""
     try:
         print(name)
-        ingredient = P3Product.objects.get(name=name)
+        ingredient = Product.objects.get(name=name)
     except:
         # traceback.print_exc()
         return total
@@ -319,7 +301,7 @@ def performQuery(QueryString, printStatus=False):
     '''
     try:
         # make initial connection
-        conn = psycopg.connect(
+        conn = psycopg2.connect(
             host=secrets.GetSecret('hostname'),
             dbname=secrets.GetSecret('database'),
             user=secrets.GetSecret('username'),

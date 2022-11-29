@@ -1,0 +1,33 @@
+{% extends 'table_header.html' %} 
+    {% block content %}
+
+    <div class="table_view">
+        <a href="{% url 'add-employee' %}"><button class="add_product">Add Employee</button></a>
+    <table>
+    <tr>
+        <th>ID</th>
+        <th>FIRST NAME</th>
+        <th>LAST NAME</th>
+        <th>EMAIL</th>
+        <th>PHONE NUMBER</th>
+        <th>JOB</th>
+        <th>HIRED DATE</th>
+        <th>LOCATION ID</th>
+    </tr>
+    {% for employee in employees %}
+    <tr>
+        <td><a href="{% url 'show-employee' employee.id %}">{{employee.id}}</a> </td>
+        <td><a href="{% url 'show-employee' employee.id %}">{{employee.first_name}}</a> </td>
+        <td><a href="{% url 'show-employee' employee.id %}">{{employee.last_name}}</a> </td>
+        <td>{{employee.email}}</td> 
+        <td>{{employee.phone_number}}</td> 
+        <td>{{ job_names|get_job:employee.job_id }}</td> 
+        <td>{{employee.hired_date}}</td> 
+        <td>{{employee.location_id}}</td> 
+    </tr>
+    {% endfor %}
+    </table>
+    </div>
+
+    {% endblock %}
+</html>

@@ -9,12 +9,12 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField as ArrayField
 
 class Category(models.Model):
-    category_id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return str(self.category_id) + ", " + self.name
+        return self.name
 
     class Meta:
         managed = False
@@ -22,7 +22,7 @@ class Category(models.Model):
 
 
 class Employee(models.Model):
-    employee_id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True, unique=True)
     first_name = models.CharField(max_length=100, blank=True, null=True)
     last_name = models.CharField(max_length=100, blank=True, null=True)
     email = models.CharField(max_length=100, blank=True, null=True)
@@ -40,7 +40,7 @@ class Employee(models.Model):
 
 
 class Job(models.Model):
-    job_id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True, unique=True)
     job_title = models.CharField(max_length=100, blank=True, null=True)
     salary = models.FloatField(blank=True, null=True)
 
@@ -52,7 +52,7 @@ class Job(models.Model):
         db_table = 'job'
 
 class Product(models.Model):
-    product_id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     qty_stock = models.IntegerField(blank=True, null=True)
@@ -84,7 +84,7 @@ class Transaction(models.Model):
 
 
 class Type(models.Model):
-    type_id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True, unique=True)
     type = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
@@ -96,7 +96,7 @@ class Type(models.Model):
 
 
 class Customer(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True, unique=True)
     first_name = models.CharField(max_length=100, blank=True, null=True)
     last_name = models.CharField(max_length=100, blank=True, null=True)
     username = models.CharField(max_length=100, blank=True, null=True)
@@ -123,3 +123,31 @@ class Recipe(models.Model):
         managed = False
         db_table = 'recipe'
  
+class SalesReport(models.Model):
+    s_time = models.DateTimeField(blank=True, null=True)
+    e_time = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.s_time
+
+    class Meta:
+        managed = False
+
+class ExcessReport(models.Model):
+    s_time = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.s_time
+
+    class Meta:
+        managed = False
+
+class SellPairs(models.Model):
+    s_time = models.DateTimeField(blank=True, null=True)
+    e_time = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.s_time
+
+    class Meta:
+        managed = False

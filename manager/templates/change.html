@@ -1,0 +1,23 @@
+{% extends 'table_header.html' %} 
+    {% block content %}
+
+    <ul>
+        <div class="active">
+        <li><a href="", class="active">Update {{type}}:</a></li>
+        </div>
+    </ul>
+
+    <div class="table_view">
+        <a href="{{request.META.HTTP_REFERER|escape}}"><button class="add_product">Back</button></a>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table class="change_view">
+        {{ form.as_table}}
+        </table>
+        <input type="submit" value="Update", class="submit_add">
+        <a href="delete/{{ id }}"><span class = "submit_delete">Delete</span></a>
+    </form>
+    </div>
+
+    {% endblock %}
+</html>

@@ -1,32 +1,32 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="{% static 'Toppings_selection.css' %}">
-<body>    
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+<body>
+
+
+
 
 <form method="POST">
     {% csrf_token %}
+        <h2 style="color:white;">Meat Topping<h2>        
+        <div class="container"; style="grid-template-columns: repeat(5, 1fr);">  
+        {% for order in orderNames %}
+        <div onclick="javascript:getElementById('b{{forloop.counter}}').click();" class = "card" style="background: #383838 url({% static 'media/'|add:order|add:'.jpg' %}); background-size: cover;  background-position: center center;"> 
+            <input id="b{{forloop.counter}}" class = "yellow" type="submit" name="btn"  value="{{order}}">
+        </div>
+        {% endfor %}
+        </div>
+        
+        <h2 style="color:white;">Veggie Topping<h2>   
+        <div class="container"; style="grid-template-columns: repeat(5, 1fr);">  
+            {% for order in orderNames2 %}
+            <div onclick="javascript:getElementById('b{{forloop.counter}}').click();" class = "card" style="background: #383838 url({% static 'media/'|add:order|add:'.jpg' %}); background-size: cover;  background-position: center center;"> 
+                <input id="b{{forloop.counter}}" class = "yellow" type="submit" name="btn"  value="{{order}}">
+            </div>
+            {% endfor %}
+            </div>
 
-    <div class = "grid">  
-
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/meatball.jpg' %}); background-size: cover;  background-position: center center;" value="Meatball">
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/ham.jpg' %}); background-size: cover;  background-position: center center;" value="Diced Ham"> 
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/italian.jpg' %}); background-size: cover;  background-position: center center;" value="Italian Sausage"> 
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/chicken.jpg' %}); background-size: cover;  background-position: center center;" value="Smoked Chicken">
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/pepperoni.jpg' %}); background-size: cover;  background-position: center center;" value="Pepperoni"> 
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/salami.jpg' %}); background-size: cover;  background-position: center center;" value="Salami"> 
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/garlic.jpg' %}); background-size: cover;  background-position: center center;" value="Roasted Garlic">
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/green.jpg' %}); background-size: cover;  background-position: center center;" value="Green Peppers"> 
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/spinach.jpg' %}); background-size: cover;  background-position: center center;" value="Spinach"> 
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/banana.jpg' %}); background-size: cover;  background-position: center center;" value="Banana Peppers">
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/olives.jpg' %}); background-size: cover;  background-position: center center;" value="Black Olives"> 
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/shrooms.jpg' %}); background-size: cover;  background-position: center center;" value="Mushrooms"> 
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/tomatoes.jpg' %}); background-size: cover;  background-position: center center;" value="Tomatoes">
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/onions.jpg' %}); background-size: cover;  background-position: center center;" value="Onions"> 
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/pineapple.jpg' %}); background-size: cover;  background-position: center center;" value="Pineapple"> 
-        <input type="submit" name="btn" class = "card" style="background: url({% static 'media/jalapeno.jpg' %}); background-size: cover;  background-position: center center;" value="Jalapenos"> 
-
-    </div>  
 </form>
 {{ val }}
 

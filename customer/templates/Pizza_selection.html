@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="{% static 'Pizza_selection.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 <body>
 
 
@@ -9,13 +9,14 @@
 
 <form method="POST">
     {% csrf_token %}
-        
-    <div class = "grid">  
-        <input type="submit" name="btn" class = "card" style="background-image: url({% static 'media/cheese_pizza.jpg' %})" value="Cheese"> 
-        <input type="submit" name="btn" class = "card" style="background-image: url({% static 'media/pepperoni_pizza.jpg' %})" value="Pepperoni"> 
-        <input type="submit" name="btn" class = "card" style="background-image: url({% static 'media/1topping.jpg' %})" value="1-topping"> 
-        <input type="submit" name="btn" class = "card" style="background-image: url({% static 'media/4topping.jpg' %})" value="4-topping"> 
-    </div>  
+
+        <div class="container"; style="grid-template-columns: repeat(4, 1fr);">  
+        {% for order in orderNames %}
+        <div onclick="javascript:getElementById('b{{forloop.counter}}').click();" class = "card" style="background: #383838 url({% static 'media/'|add:order|add:'.jpg' %}); background-size: cover;  background-position: center center;"> 
+            <input id="b{{forloop.counter}}" class = "yellow" type="submit" name="btn"  value="{{order}}">
+        </div>
+        {% endfor %}
+        </div>
 
 </form>
 {{ val }}

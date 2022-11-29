@@ -10,24 +10,24 @@ class TransactionAdmin(admin.ModelAdmin):
     list_display = ('time', 'products', 'cost')
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('category_id', 'name', 'description')
+    list_display = ('id', 'name', 'description')
 
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ('employee_id', 'first_name', 'last_name', 'email', 'get_job')
+    list_display = ('id', 'first_name', 'last_name', 'email', 'get_job')
 
-    @admin.display(ordering='job_id', description='job_id')
+    @admin.display(ordering='id', description='id')
     def get_job(self, obj):
-        return Job.objects.get(job_id=obj.job_id).job_title
+        return Job.objects.get(id=obj.job_id).job_title
 
 class JobAdmin(admin.ModelAdmin):
-    list_display = ('job_id', 'job_title', 'salary')
+    list_display = ('id', 'job_title', 'salary')
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('product_id', 'name', 'qty_stock', 'price', 'get_category')
+    list_display = ('id', 'name', 'qty_stock', 'price', 'get_category')
 
     @admin.display(ordering='category', description='category')
     def get_category(self, obj):
-        return Category.objects.get(category_id=obj.category_id).name
+        return Category.objects.get(id=obj.category_id).name
 
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'username', 'phone_number')
