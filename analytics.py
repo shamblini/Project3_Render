@@ -3,10 +3,14 @@ from datetime import datetime
 
 def salesReport(startTime: str, endTime: str) -> dict:
     '''
-     Retrieves a sales report from the database in a given time window
-     @param startTime start time of the sales report
-     @param endTime end time of the sales report
-     @return returns a list of transactions from startTime to endTime
+    Retrieves a sales report from the database in a given time window
+
+            Parameters:
+                    str startTime start time of the sales report
+                    str endTime end time of the sales report
+
+            Returns: 
+                    map of items and quantity sold from startTime to endTime
     '''
 
     orderData = Transaction.objects.filter(time__range=[startTime, endTime])
@@ -44,9 +48,12 @@ def salesReport(startTime: str, endTime: str) -> dict:
 def excessReport(startTime: str) -> 'list[str]':
     '''
      Finds items in the inventory that sold less than 10% of their quantity in a given time window
-     @param startTime start time of the transactions to search
-     @param endTime end time of the transactions to search
-     @return returns a list of ingredients
+
+            Parameters:
+                    str startTime start time of the excess report
+
+            Returns: 
+                    map of items and remaining quantity from startTime to endTime
      */
      '''
     date = datetime.today().strftime('%Y-%m-%d')
@@ -69,9 +76,9 @@ def excessReport(startTime: str) -> 'list[str]':
 def restockReport() -> 'list[str]':
     '''
     Finds items in the inventory that have sold more than the remaining quantity in a given time window
-    @param startTime start time of the transactions to search
-    @param endTime end time of the transactions to search
-    @return returns a list of ingredients
+
+            Returns: 
+                    list of low items and quantity remaining
 
     '''
     earliest = Transaction.objects.order_by('time')[0].time
@@ -88,9 +95,13 @@ def restockReport() -> 'list[str]':
 def sellPairs(startTime: str, endTime: str) -> 'list[str]':
     '''
     Finds items in the inventory that sell together the most commonly in a given time window
-    @param startTime start time of the transactions to search
-    @param endTime end time of the transactions to search
-    @return returns a list of pairs of ingredients
+
+            Parameters:
+                    str startTime start time of the pairs report
+                    str endTime end time of the pairs report
+
+            Returns: 
+                    a list of pairs of ingredients
     '''
 
     largestPairs = []

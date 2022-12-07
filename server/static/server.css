@@ -1,11 +1,11 @@
 body{
-    background: black;
+    background: rgb(15, 15, 15);
 }
 
 h2{
     color:white;
 }
-
+/*
 input{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 15px;
@@ -14,7 +14,7 @@ input{
     border-radius: 10px;
     border: black solid 1px;
 }
-
+*/
 .grid{
     display: grid;
     gap: 1rem;
@@ -25,7 +25,7 @@ input{
 
 
 .checkout{
-    margin-top: 33%;
+    margin-top: 5%;
     padding-top: 5%;
     width:30vw;
     border-radius: 10px;
@@ -35,29 +35,29 @@ input{
     text-align: left;
 }
 
-.next{
-    color:black;
-    background-color: rgb(19, 165, 19);
-    width:120px;
-    height:80px;
-}
-
 .archgrid{
     display: grid;
     gap: 3rem;
     grid-template-columns: 60vw 30vw;
     grid-template-rows: 1fr;
 }
-/*
-.box{
-    width:100%;
+
+.card{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    background: rgb(232,183,85);
+    color:black;
+    border-radius: 10px;
+    outline: none;
 }
 
-.rightbox{
-    float:right;
+.card:hover{
+    border:whitesmoke 3px solid;
 }
 
-.leftbox{
-    float:left;
+.desc {
+    padding: 0;
+    text-align: center;
+    
 }
-  */  

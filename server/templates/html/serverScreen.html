@@ -15,7 +15,7 @@
 
 <body>
  <div class = "archgrid">
-    <div class = "leftbox">
+    <div>
         <form method="POST">
             {% csrf_token %}
             <h2>Primary Elements</h2>
@@ -31,14 +31,14 @@
             <div class = "grid">
                 <input type="submit" name="btn" class = "card" value="regular_crust"
                 {% if base_control %}
-                    disabled="disabled"
+                    disabled="disabled" style = "background-color: #5f4a20"
                 {%endif%}
                 >
                 {% for product in products%}
                 {% if product.category_id == 8 %}
                     <input type="submit" name="btn" class = "card" value={{product.name}}
                     {% if base_control %}
-                        disabled="disabled"
+                        disabled="disabled" style = "background-color: #5f4a20"
                     {%endif%}
                     >
                 {%endif%}
@@ -52,7 +52,7 @@
                 {% if product.category_id == 3 %}
                     <input type="submit" name="btn" class = "card" value={{product.name}}
                     {% if base_control %}
-                        disabled="disabled"
+                        disabled="disabled" style = "background-color: #5f4a20"
                     {%endif%}
                     >
                 {%endif%}
@@ -64,17 +64,17 @@
             <div class = "grid">
                 <input type="submit" name="btn" class = "card" value="traditional_red_sauce"
                 {% if base_control %}
-                    disabled="disabled"
+                    disabled="disabled" style = "background-color: #5f4a20"
                 {%endif%}
                 >
                 <input type="submit" name="btn" class = "card" value="alfredo"
                 {% if base_control %}
-                    disabled="disabled"
+                    disabled="disabled" style = "background-color: #5f4a20"
                 {%endif%}
                 >
                 <input type="submit" name="btn" class = "card" value="zesty_Red"
                 {% if base_control %}
-                    disabled="disabled"
+                    disabled="disabled" style = "background-color: #5f4a20"
                 {%endif%}
                 >        
             </div>
@@ -85,7 +85,7 @@
                 {% if product.category_id == 6 %}
                     <input type="submit" name="btn" class = "card" value={{product.name}}
                     {% if base_control or topMax <= toppingCount %}
-                        disabled="disabled"
+                        disabled="disabled" style = "background-color: #5f4a20"
                     {%endif%}
                     >
                 {%endif%}
@@ -99,7 +99,7 @@
                 {% if product.category_id == 9 %}
                     <input type="submit" name="btn" class = "card" value={{product.name}}
                     {% if base_control  or topMax <= toppingCount %}
-                        disabled="disabled"
+                        disabled="disabled" style = "background-color: #5f4a20"
                     {%endif%}
                     >
                 {%endif%}
@@ -113,7 +113,7 @@
                 {% if product.category_id == 5 %}
                     <input type="submit" name="btn" class = "card" value={{product.name}}
                     {% if base_control %}
-                        disabled="disabled"
+                        disabled="disabled" style = "background-color: #5f4a20"
                     {%endif%}
                     >
                 {%endif%}
@@ -127,7 +127,7 @@
                 {% if product.category_id == 1 %}
                     <input type="submit" name="btn" class = "card" value={{product.name}}
                     {% if fd_control %}
-                        disabled="disabled"
+                        disabled="disabled" style = "background-color: #5f4a20"
                     {%endif%}
                     >
                 {%endif%}
@@ -141,7 +141,7 @@
                 {% if product.category_id == 10 %}
                     <input type="submit"name="btn" class = "card" value={{product.name}}
                     {% if bd_control %}
-                        disabled="disabled"
+                        disabled="disabled" style = "background-color: #5f4a20"
                     {%endif%}
                     >
                 {%endif%}
@@ -150,19 +150,23 @@
             </div>
     
         </form>
-
-    <div class="rightbox">
+    </div>
+    <div>
+        <h2 class = "desc">Spin n Stone Order Total:</h2>
+        <textarea readonly class="checkout" style = "font-size: medium;">
+            Order Total: $ {{ orderTotal }}
+            {% for item in totalOrder%}
+                Item {{forloop.counter}}: {{ item }}
+            {% endfor %}  
+        </textarea>
         <form method="POST">
             {% csrf_token %}
             <div class = "grid">
-                <input type="submit" name="btn" class = "card" value="Clear Order">
-                <input type="submit" name="btn" class = "card" value="New Pizza">
-                <input type="submit" name="btn" class = "card" value="Confirm Order">
+                <input type="submit" name="btn" class = "card" style = "background-color: #ff3535" value="Clear Order">
+                <input type="submit" name="btn" class = "card " style = "background-color: #35abff" value="New Pizza">
+                <input type="submit" name="btn" class = "card order_but" style = "background-color: #35ff4d" value="Confirm Order">
             </div>
         </form>
-        <textarea readonly class="checkout">
-            {{totalOrder}}
-        </textarea>
     </div>
 </div>
 

@@ -10,24 +10,29 @@ from DBModels.models import Category, Employee, Job, Product, Transaction, Type,
 
 def createTransaction(items: 'list[list[str]]'):
     '''
-    Given a transaction object, createTransaction will create the SQL commands to update 
-    the inventroy and transaction tables and write them to databaseCommands.txt
+    Given a 2D list of items, createTransaction will calculate the total price of 
+    the order and update the models to change the inventroy and transaction tables.
 
             Parameters:
-                    `Transaction transaction`: The transaction object
+                    `list[list[str]] items`: The items in the order
 
             Returns:
                     Nothing
     '''
+    
+    # Do nothing if there is no items
+    if len(items) == 0:
+        return
 
-    # make items contain lists of length 10 for SQL
+    # make items contain lists of equal length for SQL
+    max_len = len(max(items, key=len))
     for i in items:
-        while len(i) < 10:
+        while len(i) < max_len:
             i.append("-")
 
-    # format items as a 2D list for SQL
     itemString = "{ "
-    for listItem in items:
+    for j in range(len(items)):
+        listItem = items[j]
         listValues = "{"
         for i in range(len(listItem)):
             value = listItem[i]
@@ -36,14 +41,14 @@ def createTransaction(items: 'list[list[str]]'):
                 listValues += "\""
             else:
                 listValues += "\", "
-        if listItem == items[len(items) - 1]:
+        if j == len(items) - 1:
             listValues += "} "
         else:
             listValues += "}, "
         itemString += listValues; 
     itemString += "}"
 
-    total = checkPriceCustomer(items)
+    total = round(checkPriceCustomer(items) * 1.0825, 2)
     time = datetime.datetime.now()
 
     Transaction.objects.create(type=0, products=itemString, time=time, cost=total)
@@ -85,8 +90,8 @@ def createTransaction(items: 'list[list[str]]'):
 
 def createRestock(name: str, quantity: int):
     '''
-    Given a restock order, createTransaction will create the SQL commands to update 
-    the inventroy and transaction tables and write them to databaseCommands.txt
+    Given a restock order, createTransaction will update the models to change 
+    the inventroy and transaction tables and calculate the total price of the restock.
 
             Parameters:
                     `str name`: The ingredient being restocked
@@ -110,13 +115,13 @@ def createRestock(name: str, quantity: int):
 
 def checkRecipe(name: str) -> dict:
     '''
-    checkRecipes check recipes.json given a recipe name and give the recipe data
+    checkRecipes checks the recipe objects from the recipe models for a given recipe and returns its ingredients
 
             Parameters:
                     `str name`: The name of the recipe
 
             Returns:
-                    The recipe data as a `dictionary` if name is in recipes.json, otherwise `None`
+                    The recipe data as a `dictionary` if name is in recipes.objects, otherwise `None`
     '''
 
     try:
@@ -129,13 +134,13 @@ def checkRecipe(name: str) -> dict:
 
 def checkPriceCustomer(ingredients: 'list[list[str]]') -> float:
     '''
-    checkPriceCustomer will check ingredients.json given a matrix of ingredients and return the cost of the order
+    checkPriceCustomer will check the products models given a matrix of ingredients and return the cost of the order
 
             Parameters:
                     `list[list[str]] ingredients`: 2D List of ingredients in the order
 
             Returns:
-                    The cost of the order as a `float`
+                    The cost of the order as a `float` including tax
     '''
     total = 0.0
 
@@ -156,7 +161,7 @@ def checkPriceCustomer(ingredients: 'list[list[str]]') -> float:
 
 def checkPriceManager(name: str, quantity: int) -> float:
     '''
-    checkPriceManager will check ingredients.json given an ingredient and return the cost of the restock order
+    checkPriceManager will check all product objects and return the cost of the restock order
 
             Parameters:
                     `str name`: Name of the item being restocked

@@ -1,22 +1,88 @@
+{% load google_translate %}
 {% load static %}
+{% load custom_tags %}
 <!DOCTYPE html>
 <html>
     <link rel="stylesheet" href="{% static 'Check.css' %}">
+    <title>Spin n Stone</title>
 <body> 
-    <h1>Order Complete</h1> </br>
+
+    <h1 style="color:gold;">Checkout</h1>
     
-    <div class="container">
-        <textarea>
-     {% for item in currentOrder %}
-            {{item}}
-     {% endfor %}
-        </textarea>
-        <div>
-            <button style="background-color:rgb(48, 196, 48);margin-bottom: 5px;">Complete Order</button>
-            <button style="background-color: rgb(232,183,85)">Order More</button>
-            <button style="background-color:red">Back</button>
-        </div>    
+    <form method="POST">
+        {% csrf_token %}
+
+        {% for order in fullOrder %}
+
+        <div class="itemContainer">
+
+            <div class="subContainer">
+            <h2>{{forloop.counter}} &#28 {{order.1.0}}</h2>
+            <h4>Quantity: {{order.0}}</h4>
+            <h4>Cost: ${{ order.2 | multiply:order.0 }} </h4>
+            </div>
+
+            <div style ="display:flex;"class="subContainer">
+                <ul>
+                {% for item in order.1 %}
+                    {% if forloop.counter != 1%}
+                        <li>{{item}}</li>
+                    {% endif %}
+                    {% if forloop.counter|divisibleby:4 %}
+                </ul>
+                <ul>
+                    {% endif %}
+                    
+                {% endfor %}
+                </ul>
+            </div>
+
+            <div class="subContainer" style="margin-left: auto;">
+            <button class="itemButtons" style="background-color:#35ff4d; border: solid #35ff4d 5px; display:{{otherCheckoutButton}};" type="submit" name="btn"  value="Increment Item {{forloop.counter}} Quantity">Quantity &#8679</button>
+            <button class="itemButtons" style="background-color:#ffb535; border: solid #ffb535 5px; display:{{otherCheckoutButton}};" type="submit" name="btn"  value="Decrement Item {{forloop.counter}} Quantity">Quantity &#8681</button>                
+            <button class="itemButtons" style="background-color:#ff3535; border: solid #ff3535 5px; display:{{otherCheckoutButton}};" type="submit" name="btn"  value="Delete Item {{forloop.counter}}">Delete</button>               
+            <button class="itemButtons" style="background-color:#35abff; border: solid #35abff 5px; display:{{otherCheckoutButton}};" type="submit" name="btn"  value="Edit Item {{forloop.counter}}">Edit</button>     
+            </div>     
+
+        </div>
+
+        {% endfor %}
+
+        <div class="itemContainer">
+        <div class="subContainer"></div>   
+        
+        </div>
+        <div class="holdSpace"></div> 
+        <div class="footer">
+            <div class="footerdiv">
+            <h3 style="color:#ff3535;" class="noMargin">Checkout</h3>
+            <p class="noMargin">Enjoy! Feel free to order more and come again soon!</p>
+            </div>
+            <h1 style="margin:auto; margin-left:5px; display:{{otherCheckoutButton}};">Order Cost: ${{total_price}}</h1>
+            <div style="margin-right:5px">
+            {% google_translate type='vertical' language='en' %}  
+            </div>
+        <span>
+            <button class="checkoutButton" style="background-color:#35ff4d; border: solid #35ff4d 5px; display:{{otherCheckoutButton}};" type="submit" name="btn"  value="Complete Order">Complete Order</button>
+            <button class="checkoutButton" style="background-color:#35abff; border: solid #35abff 5px; display:{{otherCheckoutButton}};" type="submit" name="btn"  value="Order More">Order More</button>
+            <button class="checkoutButton" type="submit" name="btn"  value="Exit">Exit</button>
+        </span>
+
+    
     </div>
+
+<div class="confirmWindow" style="display:{{popup}};">
+    <h1 style="color:gold;">Confirm order?<h1></br>
+        <h2 style="margin:auto;">Order Cost: ${{total_price}}</h2>
+        <h2 style="margin:auto;">Order Tax:   &#28${{total_price|multiply:.0825}}</h2>
+        <div style="margin-top:10px; border-top: solid 5px #747474">
+        <h2 style="margin-top:10px; float:right;">Order Total: ${{total_price_with_Tax}}</h2>
+    <button class="itemButtons" id="confirmWindowButtons" style="background-color:#35ff4d; border: solid #35ff4d 5px; left:calc(20% + 25px);" type="submit" name="btn"  value="Confirm Order">Confirm Order</button>
+    <button class="itemButtons" id="confirmWindowButtons" style="background-color:#ff3535; border: solid #ff3535 5px; right:calc(20% - 25px); " type="submit" name="btn"  value="Cancel">Cancel</button>
+
+</div>
+
+</form>
     
 </body>
 </html>    

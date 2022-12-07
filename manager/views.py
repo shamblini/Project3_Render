@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.template.defaulttags import register
+from datetime import date, timedelta
 
 from .analytics import salesReport, sellPairs, excessReport, restockReport
 
@@ -8,8 +9,6 @@ from DBModels.models import Category, Employee, Job, Product, Transaction, Type,
 from DBModels.forms import ProductForm, CategoryForm, TransactionForm, EmployeeForm, JobForm, ModelForm, RecipeForm, CustomerForm, SalesReportForm, ExcessReportForm, SellPairsForm
 
 # Create your views here.
-# def managerScreen(request):
-#     return render(request, 'html/managerScreen.html', {})
 
 # register = template.Library()
 
@@ -30,8 +29,57 @@ def get_category(dictionary: dict, key: int):
 def get_job(dictionary: dict, key: int):
     return job_names.get(key)
 
+@register.filter
+def format_recipe(list: 'list[str]'):
+    ans = ""
+    for i in range(len(list)):
+        ans = ans + str(list[i])
+        if i < len(list)-1:
+            ans = ans + ", "
+    return ans
+
+@register.filter
+def format_transaction(matrix: 'list[list[str]]'):
+    ans = ""
+    quants = {}
+    for list in matrix:
+        
+        list_text = "["
+        for i in range(len(list)):
+            if list[i] != "-":
+                list_text = list_text + list[i]
+                if i < len(list)-1 and list[i + 1] != "-":
+                    list_text = list_text + ", "
+        list_text = list_text + "]"
+
+        if list_text not in quants:
+            quants[list_text] = 0
+        quants[list_text] += 1
+    
+    for list in quants:
+        ans += list + " x" + str(quants[list]) + '\n'
+    
+    return ans
+
 def managerScreen(request):
-    return render(request,"managerScreen.html", {})
+    today = date.today()
+    d1 = today.strftime("%Y-%m-%d")
+    d2 = today + timedelta(days = 1)
+    sr_result = salesReport(d1, d2)
+    rs_result = restockReport()
+
+    empty_vals = []
+    for key in sr_result:
+        if sr_result.get(key) == 0:
+            empty_vals.append(key)
+    
+    for val in empty_vals:
+        sr_result.pop(val)
+
+    return render(request,"managerScreen.html", 
+    {'sr_result' : sr_result,
+     'rs_result' : rs_result,
+     'date' : d1,})
 
 def analytics(request):
     sr_form = SalesReportForm(request.POST or None)

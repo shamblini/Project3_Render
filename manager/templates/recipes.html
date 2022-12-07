@@ -14,8 +14,8 @@
     <tr>
         <td><a href="{% url 'show-recipe' recipe.id %}">{{recipe.id}}</a> </td>
         <td><a href="{% url 'show-recipe' recipe.id %}">{{recipe.name}}</a> </td>
-        <td>{{recipe.ingredient_list}}</td> 
-        <td>{{recipe.quantity}}</td> 
+        <td>{{recipe.ingredient_list|format_recipe}}</td> 
+        <td>{{recipe.quantity|format_recipe}}</td> 
     </tr>
     {% endfor %}
     </table>

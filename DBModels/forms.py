@@ -158,8 +158,8 @@ class RecipeForm(ModelForm):
 
             widgets = {
                 'name': forms.TextInput(attrs={'class': 'form-control'}),
-                'ingredient_list': forms.TextInput(attrs={'class': 'form-control'}),
-                'quantity': forms.TextInput(attrs={'class': 'form-control'}),
+                'ingredient_list': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Item_1, Item_2, ...'}),
+                'quantity': forms.TextInput(attrs={'class': 'form-control',  'placeholder': 'Quantity_1, Quantity_2, ...'}),
             }
 
 class SalesReportForm(ModelForm):

@@ -1,7 +1,11 @@
+{% extends "footer.html" %}
 {% load static %}
+
+{% block content %}
 <!DOCTYPE html>
 <html>
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Spin n Stone</title>
 <body>
 
 
@@ -13,7 +17,7 @@
         <div class="container"; style="grid-template-columns: repeat(4, 1fr);">  
         {% for order in orderNames %}
         <div onclick="javascript:getElementById('b{{forloop.counter}}').click();" class = "card" style="background: #383838 url({% static 'media/'|add:order|add:'.jpg' %}); background-size: cover;  background-position: center center;"> 
-            <input id="b{{forloop.counter}}" class = "yellow" type="submit" name="btn"  value="{{order}}">
+            <button id="b{{forloop.counter}}" class = "yellow" type="submit" name="btn"  value="{{order}}">{{order}}</button>
         </div>
         {% endfor %}
         </div>
@@ -23,3 +27,4 @@
 
 </body>
 </html>
+{% endblock %}

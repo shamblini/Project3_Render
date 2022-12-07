@@ -14,7 +14,7 @@
     {% for transaction in transactions %}
     <tr>
         <td><a href="{% url 'show-transaction' transaction.id %}">{{transaction.id}}</a> </td>
-        <td><a href="{% url 'show-transaction' transaction.id %}">{{transaction.products}}</a> </td>
+        <td><a href="{% url 'show-transaction' transaction.id %}">{{transaction.products|format_transaction|linebreaks}}</a> </td>
         <td>{{transaction.time}}</td> 
         <td>{{transaction.type}}</td> 
         <td>${{transaction.cost}}</td> 

@@ -1,3 +1,4 @@
+{% load google_translate %}
 {% load static %}
 <!DOCTYPE html>
 
@@ -15,13 +16,14 @@
 
 <body>
 
-<h1> Order Here</h1>
+<div class = "PizzaImage"> </div>
+
 
 <div class = "footer">
     <div class="grid">
-    <a></a>    
+    {% google_translate type='vertical' language='en' %}    
     <a href="customer/" class="footercenter border"> Click to Begin Order</a>
-    <a href = 'server/' class = "border" style="font-style: italic;"> Employee</a>
+    <a></a>
     </div>
 </div>
 

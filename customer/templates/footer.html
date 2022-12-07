@@ -1,0 +1,32 @@
+{% load google_translate %}
+{% block content %}
+{% endblock %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="footer">
+        <div class="footerdiv">
+        <h3 style="color:#ff3535;" class="noMargin">{{taskbarMessage}} </h3>
+        <p class="noMargin"> Current Order:
+        {% for order in currentOrder %}
+        {{order}}<span style="color:#ff3535;"> &#x2794 </span>
+        {% endfor %}
+        </p>
+        <div>
+        </div>
+        </div>
+
+        <div style="margin-left:auto;margin-right:5px;">
+            {% google_translate type='vertical' language='en' %} 
+        </div>
+        
+    <span>
+        {% if taskbarMessage != "Select Order" and taskbarMessage != "Select Crust" %}
+        <button class="checkoutButton" type="submit" name="btn" value="Next">Next</button>
+        {% endif %}
+        <button class="checkoutButton" type="submit" name="btn" value="Checkout">Checkout</button>
+    </span>
+</form>
+
+</div>

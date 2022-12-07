@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'manager',
     'server',
     'DBModels',
+    'google_translate',
 ]
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'

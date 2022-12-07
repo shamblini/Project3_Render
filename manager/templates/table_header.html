@@ -8,7 +8,8 @@
 
 <body>
 <ul>
-    <li class="active"><a href="">Tables</a></li>
+    <li><a href="/manager/">Overview</a></li>
+    <li class="active"><a href="/manager/products/">Tables</a></li>
     <li><a href="/manager/analytics/">Analytics</a></li>
 </ul>
 
@@ -32,7 +33,12 @@
         if (anchor.id == tofind) {anchor.classList.add("active");}
         }); 
         </script>
+
 {% block content %}
 
 {% endblock %}
+
+<center>
+    <button onclick="window.location.href='/'" class="CustomerView">Customer View</button>
+    </center>
 </body>

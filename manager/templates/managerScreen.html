@@ -1,7 +1,68 @@
-{% extends 'table_header.html' %} 
-<body>
-    {% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="{% static 'TableView.css' %}">
+<head>
+    <title>Spin n Stone Manager View</title>
+</head>
 
-    {% endblock %}
+<body>
+    <ul>
+        <li class="active"><a href="/manager/">Overview</a></li>
+        <li><a href="/manager/products/">Tables</a></li>
+        <li><a href="/manager/analytics/">Analytics</a></li>
+    </ul>
+
+    <div class="table_view">
+        <div class="analytics_view">
+            <div class="analytic_div">
+                <h3>Location:</h3>
+                <iframe
+                width="600"
+                height="450"
+                style="border:0"
+                loading="lazy"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCoNqJEVmL9_xb-tT815L4Q0z3B6FOmLMM&q=Spin+N+Stone+Pizza+MSC">
+                </iframe>
+            </div>
+            <div class="analytic_div">
+                <h3>Sold Today ({{date}}):</h3>
+                <table class="analytics">
+                    <tr>
+                        <th>ITEM</th>
+                        <th>QTY SOLD</th>
+                    </tr>
+        
+                    {% for key, value in sr_result.items %}
+                    <tr>
+                        <td>{{key}}</td>
+                        <td>{{value}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="analytic_div">
+                <h3>Low Quantity Items:</h3>
+                <table class="analytics">
+                    <tr>
+                        <th>ITEM</th>
+                        <th>CURR STOCK</th>
+                    </tr>
+        
+                    {% for key, value in rs_result.items %}
+                    <tr>
+                        <td>{{key}}</td>
+                        <td>{{value}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+         </div>
+    </div>
+    <center>
+    <button onclick="window.location.href='/'" class="CustomerView">Customer View</button>
+    </center>
+
+    
 </body>
 </html>

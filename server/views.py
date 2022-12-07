@@ -61,6 +61,8 @@ def serverScreen(request):
         request.session['toppingCount'] = 0
         request.session['topMax'] = 0
         request.session['totalOrder'] = totalOrder.copy()
+        request.session['numItem'] = 1
+        request.session['orderTotal'] = 0.0
 
     if request.method == 'POST':
         form = buttonForm(request.POST)
@@ -92,11 +94,11 @@ def serverScreen(request):
                     for ing in val['ingredient_list']:
                         currentOrder.append(ing)
             elif(item == "alfredo"):
-                for val in recipes.filter(name="alfredo").values():
+                for val in recipes.filter(name="alfredo_sauce").values():
                     for ing in val['ingredient_list']:
                         currentOrder.append(ing)
             elif(item == "zesty_Red"):
-                for val in recipes.filter(name="zesty_Red").values():
+                for val in recipes.filter(name="zesty_Red_sauce").values():
                     for ing in val['ingredient_list']:
                         currentOrder.append(ing)
             elif(item == "New Pizza"):
@@ -104,7 +106,7 @@ def serverScreen(request):
                     totalOrder.append(currentOrder.copy())
                 request.session['totalOrder'] = totalOrder.copy()
                 print(totalOrder)
-
+                request.session['numItem'] += 1
                 currentOrder.clear()
                 request.session['base_control'] = True
                 request.session['bd_control'] = True
@@ -115,6 +117,7 @@ def serverScreen(request):
                 request.session['ft_control'] = True
                 request.session['toppingCount'] = 0
                 request.session['topMax'] = 0
+
             elif(item == "Confirm Order"):
                 if(len(currentOrder.copy()) != 0):
                     totalOrder.append(currentOrder.copy())
@@ -122,7 +125,7 @@ def serverScreen(request):
                 print("Total Order: ")
                 print(totalOrder)
 
-                SQLFunctions.createTransaction(totalOrder)
+                SQLFunctions.createTransaction(totalOrder.copy())
 
                 request.session['base_control'] = True
                 request.session['bd_control'] = True
@@ -133,6 +136,8 @@ def serverScreen(request):
                 request.session['ft_control'] = True
                 request.session['toppingCount'] = 0
                 request.session['topMax'] = 0
+                request.session['numItem'] = 1
+      
 
                 currentOrder.clear()
                 totalOrder.clear()
@@ -146,7 +151,8 @@ def serverScreen(request):
                 request.session['ft_control'] = True
                 request.session['toppingCount'] = 0
                 request.session['topMax'] = 0
-                
+                request.session['numItem'] = 1
+    
                 totalOrder.clear()
                 currentOrder.clear()
                 request.session['totalOrder'].clear()  
@@ -166,11 +172,22 @@ def serverScreen(request):
         form = buttonForm()
 
 
+    print(request.session['numItem'] )
+    
+    if(len(request.session['totalOrder']) != request.session['numItem']):
+        request.session['totalOrder'].append(currentOrder.copy())
+    else:
+        request.session['totalOrder'][request.session['numItem']-1] = currentOrder.copy()
+
+    request.session['orderTotal'] = round(SQLFunctions.checkPriceCustomer(request.session['totalOrder']),2)
+
+
     return render(request, 'html/serverScreen.html', {
         'products':products, 'bd_control':request.session['bd_control'], 'fd_control':request.session['fd_control'],
         'cp_control':request.session['cp_control'], 'pp_control':request.session['pp_control'], 
         'ot_control':request.session['ot_control'], 'ft_control':request.session['ft_control'], 
         'base_control':request.session['base_control'], 'totalOrder':request.session['totalOrder'],
-        'toppingCount':request.session['toppingCount'],'topMax':request.session['topMax'],
+        'toppingCount':request.session['toppingCount'],'topMax':request.session['topMax'], 'orderTotal':request.session['orderTotal']
+        
         })
 
