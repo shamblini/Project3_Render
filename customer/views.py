@@ -5,6 +5,7 @@ from .forms import buttonForm
 from DBModels.models import Category, Employee, Job, Product, Transaction, Type, Customer, Recipe
 from django.shortcuts import redirect
 import SQLFunctions
+from django.contrib.auth.decorators import login_required
 
 currentOrder = []
 fullOrder = []
@@ -43,6 +44,7 @@ def outOfOrder():
     fullOrder.clear()
 
 # Create your views here.
+@login_required
 def customerScreen(request):
     if request.method == 'POST':
         form = buttonForm(request.POST)
@@ -52,7 +54,7 @@ def customerScreen(request):
             
             if orderProg["order"] != 1:
                 outOfOrder();
-                return redirect('/')
+                return redirect('/login')
                     
             # Order based logic 
             if val=="One topping":
@@ -105,7 +107,7 @@ def customerScreen(request):
         return render(request, 'Pizza_selection.html', {"orderNames":orderNames, "taskbarMessage":taskbarMessage, "currentOrder":currentOrder})
     else:
         outOfOrder();
-        return redirect('/')
+        return redirect('/login')
 
 def Crust_selection(request):
     if request.method == 'POST':
@@ -115,7 +117,7 @@ def Crust_selection(request):
             
             if orderProg["crust"] != 1:
                 outOfOrder();
-                return redirect('/')
+                return redirect('/login')
         
             if val=="Checkout":
                 orderProg["crust"] = -1;
@@ -151,7 +153,7 @@ def Crust_selection(request):
         return render(request, 'Crust_selection.html', {"orderNames":orderNames, "taskbarMessage":taskbarMessage, "currentOrder":currentOrder}) 
     else:
         outOfOrder();
-        return redirect('/')
+        return redirect('/login')
     
 def Cheese_selection(request):    
     if request.method == 'POST':
@@ -161,7 +163,7 @@ def Cheese_selection(request):
                 
             if orderProg["cheese"] != 1:
                 outOfOrder();
-                return redirect('/')
+                return redirect('/login')
             
             if val=="Checkout":
                 orderProg["cheese"] = -1;
@@ -191,7 +193,7 @@ def Cheese_selection(request):
         return render(request, 'Cheese_selection.html', {"orderNames":orderNames, "taskbarMessage":taskbarMessage, "currentOrder":currentOrder})
     else:
         outOfOrder();
-        return redirect('/')
+        return redirect('/login')
 
 def Sauce_selection(request):    
     if request.method == 'POST':
@@ -201,7 +203,7 @@ def Sauce_selection(request):
                 
             if orderProg["sauce"] != 1:
                 outOfOrder();
-                return redirect('/')
+                return redirect('/login')
                 
             if val=="Checkout":
                 orderProg["sauce"] = -1;
@@ -237,7 +239,7 @@ def Sauce_selection(request):
         return render(request, 'Sauce_selection.html', {"orderNames":orderNames,"taskbarMessage":taskbarMessage, "currentOrder":currentOrder})
     else:
         outOfOrder();
-        return redirect('/')
+        return redirect('/login')
 
 def Toppings_selection(request):    
     if request.method == 'POST':
@@ -247,7 +249,7 @@ def Toppings_selection(request):
             
             if orderProg["topping"] != 1:
                 outOfOrder();
-                return redirect('/')
+                return redirect('/login')
             
             if val=="Checkout":
                 orderProg["topping"] = -1;
@@ -284,7 +286,7 @@ def Toppings_selection(request):
 
     if orderProg["topping"] != 1:
         outOfOrder();
-        return redirect('/')
+        return redirect('/login')
 
     if orderDict['numberToppings'] == 0:
         if currentOrder[0] == "Pepperoni pizza":
@@ -304,7 +306,7 @@ def Drizzle_selection(request):
                 
             if orderProg["drizzle"] != 1:
                 outOfOrder();
-                return redirect('/')
+                return redirect('/login')
                 
             if val=="Checkout":
                 orderProg["drizzle"] = -1;
@@ -334,7 +336,7 @@ def Drizzle_selection(request):
         return render(request, 'Drizzle_selection.html', {"orderNames":orderNames,"taskbarMessage":taskbarMessage, "currentOrder":currentOrder})    
     else:
         outOfOrder();
-        return redirect('/')
+        return redirect('/login')
 
 # Needs to display recipe if there is one 
 # Need an order confirm button
@@ -349,7 +351,7 @@ def Checkout(request):
             
             if orderProg["checkout"] != 1:
                 outOfOrder();
-                return redirect('/')
+                return redirect('/login')
             
             if val == "Complete Order":
                 orderDict["popup"] = "";
@@ -363,7 +365,7 @@ def Checkout(request):
             elif val == "Exit":
                 fullOrder.clear()
                 outOfOrder();
-                return redirect('/')
+                return redirect('/login')
             
             elif "Cancel" in val:
                 print(val)
@@ -374,7 +376,7 @@ def Checkout(request):
                 customerMakeTransaction()
                 fullOrder.clear()
                 outOfOrder();
-                return redirect('/')                 
+                return redirect('/login')                 
     
             elif "Increment Item " in val:
                 itemNum = int(val.replace("Increment Item ", "").replace(" Quantity", ""))
@@ -427,4 +429,4 @@ def Checkout(request):
         return render(request, 'Checkout.html', {"fullOrder": fullOrder, "total_price":round(total_price, 2),"total_price_with_Tax": round(total_price_with_Tax, 2), "currentOrder":currentOrder, "popup":orderDict["popup"], "otherCheckoutButton":orderDict["otherCheckoutButton"]})     
     else:
         outOfOrder();
-        return redirect('/')   
+        return redirect('/login')   

@@ -4,6 +4,7 @@ from .forms import buttonForm
 from .models import Product, Recipe
 from collections import defaultdict
 import SQLFunctions
+from django.contrib.admin.views.decorators import staff_member_required
 
 products = Product.objects.all()
 recipes = Recipe.objects.all()
@@ -47,6 +48,7 @@ def initializeLists():
 initializeLists()
 
 # Create your views here.
+@staff_member_required
 def serverScreen(request):
     try:
         print(request.session['base_control'])

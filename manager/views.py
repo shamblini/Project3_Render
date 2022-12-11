@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.template.defaulttags import register
 from datetime import date, timedelta
+# from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.contrib.admin.views.decorators import staff_member_required
 
 from .analytics import salesReport, sellPairs, excessReport, restockReport
 
@@ -60,7 +62,7 @@ def format_transaction(matrix: 'list[list[str]]'):
         ans += list + " x" + str(quants[list]) + '\n'
     
     return ans
-
+@staff_member_required
 def managerScreen(request):
     today = date.today()
     d1 = today.strftime("%Y-%m-%d")
