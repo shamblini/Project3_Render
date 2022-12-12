@@ -52,9 +52,9 @@ def customerScreen(request):
             val = form.cleaned_data.get("btn")
             currentOrder.append(val) 
             
-            if orderProg["order"] != 1:
-                outOfOrder();
-                return redirect('/login')
+            # if orderProg["order"] != 1:
+            #     outOfOrder();
+            #     return redirect('/login')
                     
             # Order based logic 
             if val=="One topping":
@@ -115,9 +115,9 @@ def Crust_selection(request):
         if form.is_valid():
             val = form.cleaned_data.get("btn")
             
-            if orderProg["crust"] != 1:
-                outOfOrder();
-                return redirect('/login')
+            # if orderProg["crust"] != 1:
+            #     outOfOrder();
+            #     return redirect('/login')
         
             if val=="Checkout":
                 orderProg["crust"] = -1;
@@ -161,9 +161,9 @@ def Cheese_selection(request):
             if form.is_valid():
                 val = form.cleaned_data.get("btn")
                 
-            if orderProg["cheese"] != 1:
-                outOfOrder();
-                return redirect('/login')
+            # if orderProg["cheese"] != 1:
+            #     outOfOrder();
+            #     return redirect('/login')
             
             if val=="Checkout":
                 orderProg["cheese"] = -1;
@@ -201,9 +201,9 @@ def Sauce_selection(request):
             if form.is_valid():
                 val = form.cleaned_data.get("btn")
                 
-            if orderProg["sauce"] != 1:
-                outOfOrder();
-                return redirect('/login')
+            # if orderProg["sauce"] != 1:
+            #     outOfOrder();
+            #     return redirect('/login')
                 
             if val=="Checkout":
                 orderProg["sauce"] = -1;
@@ -247,9 +247,9 @@ def Toppings_selection(request):
             if form.is_valid():
                 val = form.cleaned_data.get("btn")
             
-            if orderProg["topping"] != 1:
-                outOfOrder();
-                return redirect('/login')
+            # if orderProg["topping"] != 1:
+            #     outOfOrder();
+            #     return redirect('/login')
             
             if val=="Checkout":
                 orderProg["topping"] = -1;
@@ -304,9 +304,9 @@ def Drizzle_selection(request):
             if form.is_valid():
                 val = form.cleaned_data.get("btn")
                 
-            if orderProg["drizzle"] != 1:
-                outOfOrder();
-                return redirect('/login')
+            # if orderProg["drizzle"] != 1:
+            #     outOfOrder();
+            #     return redirect('/login')
                 
             if val=="Checkout":
                 orderProg["drizzle"] = -1;
@@ -349,9 +349,9 @@ def Checkout(request):
         if form.is_valid():
             val = form.cleaned_data.get("btn")
             
-            if orderProg["checkout"] != 1:
-                outOfOrder();
-                return redirect('/login')
+            # if orderProg["checkout"] != 1:
+            #     outOfOrder();
+            #     return redirect('/login')
             
             if val == "Complete Order":
                 orderDict["popup"] = "";
