@@ -2,6 +2,18 @@
 {% block content %}
 {% endblock %}
 
+<script>
+    function disableButtons() {
+
+        let buttons = document.getElementsByName("btn");
+        for(var i = 0; i < buttons.length; i++) {
+            buttons[i].style.visibility='hidden';
+        }
+
+        console.log("test");
+    }
+</script>
+
 <form method="POST">
     {% csrf_token %}
 
@@ -23,9 +35,9 @@
         
     <span>
         {% if taskbarMessage != "Select Order" and taskbarMessage != "Select Crust" %}
-        <button class="checkoutButton" type="submit" name="btn" value="Next">Next</button>
+        <button onclick="disableButtons();" class="checkoutButton" type="submit" name="btn" value="Next">Next</button>
         {% endif %}
-        <button class="checkoutButton" type="submit" name="btn" value="Checkout">Checkout</button>
+        <button onclick="disableButtons();" class="checkoutButton" type="submit" name="btn" value="Checkout">Checkout</button>
     </span>
 </form>
 

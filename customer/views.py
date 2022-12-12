@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 currentOrder = []
 fullOrder = []
 orderDict = {'editOrderNum':-1, 'numberToppings':-1, 'popup':"none", "otherCheckoutButton":""}
-orderProg = {"order": 1, "crust": -1, "cheese": -1, "sauce": -1, "topping": -1, "drizzle": -1, "checkout": -1}
+orderProg = {"order": 1, "crust": 1, "cheese": 1, "sauce": 1, "topping": 1, "drizzle": 1, "checkout": 1}
 
 
 def customerMakeTransaction():
@@ -31,17 +31,18 @@ def customerMakeTransaction():
     return
 
 def outOfOrder():
-    orderProg["order"] = 1;
-    orderProg["crust"] = -1;
-    orderProg["cheese"] = -1;
-    orderProg["sauce"] = -1;
-    orderProg["topping"] = -1;
-    orderProg["drizzle"] = -1;
-    orderProg["checkout"] = -1;
-    orderDict["popup"] = "none";
-    orderDict["otherCheckoutButton"] = ""
-    currentOrder.clear()
-    fullOrder.clear()
+    # orderProg["order"] = 1;
+    # orderProg["crust"] = -1;
+    # orderProg["cheese"] = -1;
+    # orderProg["sauce"] = -1;
+    # orderProg["topping"] = -1;
+    # orderProg["drizzle"] = -1;
+    # orderProg["checkout"] = -1;
+    # orderDict["popup"] = "none";
+    # orderDict["otherCheckoutButton"] = ""
+    # currentOrder.clear()
+    # fullOrder.clear()
+    return;
 
 # Create your views here.
 @login_required
@@ -103,11 +104,7 @@ def customerScreen(request):
         orderNames.append(name)
     
     taskbarMessage = "Select Order"
-    if orderProg["order"] == 1:
-        return render(request, 'Pizza_selection.html', {"orderNames":orderNames, "taskbarMessage":taskbarMessage, "currentOrder":currentOrder})
-    else:
-        outOfOrder();
-        return redirect('/login')
+    return render(request, 'Pizza_selection.html', {"orderNames":orderNames, "taskbarMessage":taskbarMessage, "currentOrder":currentOrder})
 
 def Crust_selection(request):
     if request.method == 'POST':
@@ -149,11 +146,7 @@ def Crust_selection(request):
             orderNames.append(name)
 
     taskbarMessage = "Select Crust"
-    if orderProg["crust"] == 1:
-        return render(request, 'Crust_selection.html', {"orderNames":orderNames, "taskbarMessage":taskbarMessage, "currentOrder":currentOrder}) 
-    else:
-        outOfOrder();
-        return redirect('/login')
+    return render(request, 'Crust_selection.html', {"orderNames":orderNames, "taskbarMessage":taskbarMessage, "currentOrder":currentOrder}) 
     
 def Cheese_selection(request):    
     if request.method == 'POST':
@@ -189,11 +182,7 @@ def Cheese_selection(request):
         orderNames.append(name)
         
     taskbarMessage = "Select Cheese"
-    if orderProg["cheese"] == 1:
-        return render(request, 'Cheese_selection.html', {"orderNames":orderNames, "taskbarMessage":taskbarMessage, "currentOrder":currentOrder})
-    else:
-        outOfOrder();
-        return redirect('/login')
+    return render(request, 'Cheese_selection.html', {"orderNames":orderNames, "taskbarMessage":taskbarMessage, "currentOrder":currentOrder})
 
 def Sauce_selection(request):    
     if request.method == 'POST':
@@ -235,11 +224,7 @@ def Sauce_selection(request):
             orderNames.append(name)
         
     taskbarMessage = "Select Sauce"
-    if orderProg["sauce"] == 1:
-        return render(request, 'Sauce_selection.html', {"orderNames":orderNames,"taskbarMessage":taskbarMessage, "currentOrder":currentOrder})
-    else:
-        outOfOrder();
-        return redirect('/login')
+    return render(request, 'Sauce_selection.html', {"orderNames":orderNames,"taskbarMessage":taskbarMessage, "currentOrder":currentOrder})
 
 def Toppings_selection(request):    
     if request.method == 'POST':
@@ -283,10 +268,6 @@ def Toppings_selection(request):
     for i in orders:
         name = i.name.replace("_", " ").capitalize()
         orderNames.append(name)
-
-    if orderProg["topping"] != 1:
-        outOfOrder();
-        return redirect('/login')
 
     if orderDict['numberToppings'] == 0:
         if currentOrder[0] == "Pepperoni pizza":
@@ -332,11 +313,7 @@ def Drizzle_selection(request):
         orderNames.append(name)
         
     taskbarMessage = "Select Drizzle"
-    if orderProg["drizzle"] == 1:
-        return render(request, 'Drizzle_selection.html', {"orderNames":orderNames,"taskbarMessage":taskbarMessage, "currentOrder":currentOrder})    
-    else:
-        outOfOrder();
-        return redirect('/login')
+    return render(request, 'Drizzle_selection.html', {"orderNames":orderNames,"taskbarMessage":taskbarMessage, "currentOrder":currentOrder})    
 
 # Needs to display recipe if there is one 
 # Need an order confirm button
@@ -425,8 +402,4 @@ def Checkout(request):
         
     total_price_with_Tax = total_price + (total_price * .0825)
         
-    if orderProg["checkout"] == 1:
-        return render(request, 'Checkout.html', {"fullOrder": fullOrder, "total_price":round(total_price, 2),"total_price_with_Tax": round(total_price_with_Tax, 2), "currentOrder":currentOrder, "popup":orderDict["popup"], "otherCheckoutButton":orderDict["otherCheckoutButton"]})     
-    else:
-        outOfOrder();
-        return redirect('/login')   
+    return render(request, 'Checkout.html', {"fullOrder": fullOrder, "total_price":round(total_price, 2),"total_price_with_Tax": round(total_price_with_Tax, 2), "currentOrder":currentOrder, "popup":orderDict["popup"], "otherCheckoutButton":orderDict["otherCheckoutButton"]})      
